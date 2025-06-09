@@ -8,120 +8,124 @@ struct MatrixProgramView: View {
     @State private var outputResults: [String] = []
     
     var body: some View {
-        VStack(spacing: 20) {
+        ZStack {
+            Color(AppColors.background)
+                .ignoresSafeArea(.all)
             VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Входные данные")
-                        .font(.headline)
-                        .padding(.leading, 20)
+                VStack(spacing: 20) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Входные данные")
+                            .font(.headline)
+                            .padding(.leading, 20)
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack {
+                                Text("Количество строк:")
+                                    .frame(width: 150, alignment: .trailing)
+                                TextField("Введите количество строк", text: $rows)
+                                    .textFieldStyle(.plain)
+                                    .padding(5)
+                                    .background(AppColors.cardBackground)
+                                    .cornerRadius(5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColors.border, lineWidth: 1)
+                                    )
+                                    .contentShape(Rectangle())
+                            }
+                            
+                            HStack {
+                                Text("Количество столбцов:")
+                                    .frame(width: 150, alignment: .trailing)
+                                TextField("Введите количество столбцов", text: $var_cols)
+                                    .textFieldStyle(.plain)
+                                    .padding(5)
+                                    .background(AppColors.cardBackground)
+                                    .cornerRadius(5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColors.border, lineWidth: 1)
+                                    )
+                                    .contentShape(Rectangle())
+                            }
+                        }
+                        .background(AppColors.cardBackground)
+                        .cornerRadius(10)
+                        .padding()
+                    }
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Text("Количество строк:")
-                                .frame(width: 150, alignment: .trailing)
-                            TextField("Введите количество строк", text: $rows)
-                                .textFieldStyle(.plain)
-                                .padding(5)
-                                .background(AppColors.cardBackground)
-                                .cornerRadius(5)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(AppColors.border, lineWidth: 1)
-                                )
-                                .contentShape(Rectangle())
-                        }
-                        
-                        HStack {
-                            Text("Количество столбцов:")
-                                .frame(width: 150, alignment: .trailing)
-                            TextField("Введите количество столбцов", text: $var_cols)
-                                .textFieldStyle(.plain)
-                                .padding(5)
-                                .background(AppColors.cardBackground)
-                                .cornerRadius(5)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(AppColors.border, lineWidth: 1)
-                                )
-                                .contentShape(Rectangle())
-                        }
-                    }
-                    .background(AppColors.cardBackground)
-                    .cornerRadius(10)
-                    .padding()
-                }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Исходная матрица")
-                        .font(.headline)
-                        .padding(.leading, 20)
-                        
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            ForEach(inputMatrix, id: \.self) { row in
-                                Text(row.map { String($0) }.joined(separator: "\t"))
-                                    .padding(.vertical, 4)
+                        Text("Исходная матрица")
+                            .font(.headline)
+                            .padding(.leading, 20)
+                            
+                        ScrollView {
+                            VStack(alignment: .leading) {
+                                ForEach(inputMatrix, id: \.self) { row in
+                                    Text(row.map { String($0) }.joined(separator: "\t"))
+                                        .padding(.vertical, 4)
+                                }
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 20)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                        .padding(.horizontal, 20)
+                        .frame(height: 150)
+                        .background(AppColors.resultFieldBackground)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(AppColors.border, lineWidth: 1)
+                        )
+                        .padding()
                     }
-                    .frame(height: 150)
-                    .background(AppColors.resultFieldBackground)
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(AppColors.border, lineWidth: 1)
-                    )
-                    .padding()
-                }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Результаты")
-                        .font(.headline)
-                        .padding(.leading, 20)
-                        
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            ForEach(outputResults, id: \.self) { result in
-                                Text(result)
-                                    .padding(.vertical, 4)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Результаты")
+                            .font(.headline)
+                            .padding(.leading, 20)
+                            
+                        ScrollView {
+                            VStack(alignment: .leading) {
+                                ForEach(outputResults, id: \.self) { result in
+                                    Text(result)
+                                        .padding(.vertical, 4)
+                                }
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 20)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                        .padding(.horizontal, 20)
+                        .frame(height: 200)
+                        .background(AppColors.resultFieldBackground)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(AppColors.border, lineWidth: 1)
+                        )
+                        .padding()
                     }
-                    .frame(height: 200)
-                    .background(AppColors.resultFieldBackground)
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(AppColors.border, lineWidth: 1)
-                    )
-                    .padding()
                 }
+                .padding(.horizontal, 40)
+                
+                Button(action: processMatrix) {
+                    Text("Выполнить")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(AppColors.accentBlue)
+                        .cornerRadius(10)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 40)
+                .padding(.bottom, 30)
             }
-            .padding(.horizontal, 40)
-            
-            Button(action: processMatrix) {
-                Text("Выполнить")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(AppColors.accentBlue)
-                    .cornerRadius(10)
-            }
-            .buttonStyle(PlainButtonStyle())
-            .padding(.horizontal, 40)
-            .padding(.bottom, 30)
+            .padding(.top, 30)
+            .background(AppColors.background)
+            .navigationTitle("Работа с матрицей")
         }
-        .padding(.top, 30)
-        .background(AppColors.background)
-        .navigationTitle("Работа с матрицей")
-    }
+        }
     
     private func processMatrix() {
         guard let rowsValue = Int(rows),
