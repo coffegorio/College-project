@@ -103,7 +103,3 @@ struct ProgramBlock: View {
         .buttonStyle(PlainButtonStyle())
     }
 }
-
-#Preview {
-    HomeView()
-} 

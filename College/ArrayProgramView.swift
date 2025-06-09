@@ -178,7 +178,3 @@ struct ArrayProgramView: View {
         outputResults.append(contentsOf: transformed.map { String(format: "%.2f", $0) })
     }
 }
-
-#Preview {
-    ArrayProgramView()
-} 

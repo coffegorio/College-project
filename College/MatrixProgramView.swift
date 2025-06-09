@@ -191,7 +191,3 @@ struct MatrixProgramView: View {
         }
     }
 }
-
-#Preview {
-    MatrixProgramView()
-} 

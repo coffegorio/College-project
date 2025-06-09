@@ -12,4 +12,3 @@ struct AppColors {
     static let resultFieldBackground = Color(NSColor.controlBackgroundColor).opacity(0.8)
 }
 
-// Дополнительные расширения или компоненты дизайн-системы можно добавить здесь 
