@@ -9,7 +9,6 @@ struct ArrayProgramView: View {
     @State private var outputResults: [String] = []
     
     var body: some View {
-        
         ZStack {
             Color(AppColors.background)
                 .ignoresSafeArea(.all)
@@ -142,7 +141,7 @@ struct ArrayProgramView: View {
             .background(AppColors.background)
             .navigationTitle("Работа с массивом")
         }
-        }
+    }
     
     private func processArray() {
         guard let nValue = Int(n),
@@ -152,13 +151,10 @@ struct ArrayProgramView: View {
             return
         }
         
-        // Генерация случайного массива
         inputArray = (0..<nValue).map { _ in Double.random(in: -10...10) }
         
-        // Поиск максимального по модулю элемента
         let maxIndex = inputArray.enumerated().max(by: { abs($0.element) < abs($1.element) })?.offset ?? 0
         
-        // Сумма модулей после первого положительного
         var sum = 0.0
         var foundPositive = false
         for value in inputArray {
@@ -171,11 +167,9 @@ struct ArrayProgramView: View {
             }
         }
         
-        // Преобразование массива
         var transformed = inputArray.filter { floor($0) >= aValue && floor($0) <= bValue }
         transformed.append(contentsOf: inputArray.filter { !(floor($0) >= aValue && floor($0) <= bValue) })
         
-        // Формирование результатов
         outputResults = [
             "Индекс максимального по модулю элемента: \(maxIndex)",
             "Сумма модулей после первого положительного элемента: \(String(format: "%.2f", sum))",

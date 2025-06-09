@@ -125,7 +125,7 @@ struct MatrixProgramView: View {
             .background(AppColors.background)
             .navigationTitle("Работа с матрицей")
         }
-        }
+    }
     
     private func processMatrix() {
         guard let rowsValue = Int(rows),
@@ -136,12 +136,10 @@ struct MatrixProgramView: View {
             return
         }
         
-        // Генерация случайной матрицы
         inputMatrix = (0..<rowsValue).map { _ in
             (0..<colsValue).map { _ in Int.random(in: -10...10) }
         }
         
-        // Поиск первой строки с положительным элементом
         var firstPositiveRow = -1
         for (i, row) in inputMatrix.enumerated() {
             if row.contains(where: { $0 > 0 }) {
@@ -150,12 +148,10 @@ struct MatrixProgramView: View {
             }
         }
         
-        // Удаление строк, состоящих из нулей
         let filteredRows = inputMatrix.filter { row in
             !row.allSatisfy { $0 == 0 }
         }
         
-        // Удаление столбцов, состоящих из нулей
         if !filteredRows.isEmpty {
             let newCols = filteredRows[0].count
             var isZeroCol = Array(repeating: true, count: newCols)
@@ -180,7 +176,6 @@ struct MatrixProgramView: View {
                 compacted.append(newRow)
             }
             
-            // Формирование результатов
             outputResults = ["Уплотнённая матрица:"]
             outputResults.append(contentsOf: compacted.map { row in
                 row.map { String($0) }.joined(separator: "\t")

@@ -28,6 +28,7 @@ struct HomeView: View {
                         destinationValue: .matrixProgram
                     )
                 }
+                .padding(.vertical, 50)
                 .padding(.horizontal, 40)
                 .frame(maxWidth: .infinity)
             }
@@ -76,17 +77,17 @@ struct ProgramBlock: View {
         NavigationLink(value: destinationValue) {
             HStack {
                 Image(systemName: systemImage)
-                    .font(.title)
+                    .font(.largeTitle)
                     .foregroundColor(.blue)
-                    .frame(width: 50)
+                    .frame(width: 70)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(title)
-                        .font(.headline)
+                        .font(.title2)
                     Text(description)
-                        .font(.subheadline)
+                        .font(.callout)
                         .foregroundColor(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(3)
                 }
                 
                 Spacer()
@@ -94,10 +95,10 @@ struct ProgramBlock: View {
                 Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
             }
-            .padding()
+            .padding(20)
             .background(AppColors.cardBackground)
-            .cornerRadius(10)
-            .shadow(radius: 2)
+            .cornerRadius(15)
+            .shadow(radius: 4)
         }
         .buttonStyle(PlainButtonStyle())
     }
